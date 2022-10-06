@@ -2,6 +2,10 @@
 #include<malloc.h>
 #include "circle.h"
 #include"jollyjumper.h"
+#include "jollyJumper.c"
+#include "circle.c"
+#include <assert.h>
+
 
 void printCircle(circle c) {
 	printf("p.x: %d, p.y: %d, r: %d\n", c.p.x, c.p.y, c.r);
@@ -17,22 +21,26 @@ int main(void) {
 	point p;
 	p.x = 2;
 	p.y = 2;
+
 	translate(&c[1], &p);
 	printCircle(c[1]);
-	printf("isValid: %d", circleIsValid(&c[1]));
-
+	printf("isValid: %d\n", circleIsValid(&c[1]));
+	
 	/*answer to exercise 7.b*/
-	int n; /*number of numbers to read*/
-	/*readin n and check that is is OK*/
+	int n;
+	printf("What is the size of your sequence?\n") ;
+  	scanf("%d",&n);
+	assert(n>2 && n<100);
 
-	int *numbers = malloc(sizeof(int) * n); /*the numbers read*/
+	int *numbers = malloc(sizeof(int) * n); // Allocates memory for the numbers
 
-	/*readin the n numbers in the array numbers*/
+	printf("Enter %d numbers\n",n);
+	for(int i=0;i<n;i++)
+    	scanf("%d",&numbers[i]); // Stores the numbers
 
-	if (isJollyJumber(numbers, n)) {
-		printf("it is a Jolly Jumper");}
+	if (isJollyJumper(numbers, n)) {
+		printf("It is a Jolly Jumper");}
 	else {
-		printf("not a Jolly Jumper");}
+		printf("Not a Jolly Jumper");}
 	return 0;
-
 }
